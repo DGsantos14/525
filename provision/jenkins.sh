@@ -23,7 +23,7 @@ TOKEN=$(cat /var/lib/jenkins/secrets/initialAdminPassword)
 
 _curl localhost:8080/j_acegi_security_check -d 'from=/&j_username=admin&j_password='$TOKEN > /dev/null
 
-CRUMB=$(_curl localhost:8080/crumbIssuer/api/json -u admin:$TOKEN | grep -Eo '\w{64}')
+CRUMB=$(_curl localhost:8081/crumbIssuer/api/json -u admin:$TOKEN | grep -Eo '\w{64}')
 
 BODY='{"dynamicLoad":true,"plugins":["cloudbees-folder","antisamy-markup-formatter","build-timeout","credentials-binding","timestamper","ws-cleanup","workflow-aggregator","github-branch-source","pipeline-github-lib","pipeline-stage-view","git","matrix-auth"]}'
 _curl localhost:8080/pluginManager/installPlugins -H 'Content-Type: application/json' -H "Jenkins-Crumb: $CRUMB" -d "$BODY" > /dev/null
@@ -33,5 +33,5 @@ _curl localhost:8080/setupWizard/createAdminUser -H "Jenkins-Crumb: $CRUMB" -d "
 
 CRUMB=$(_curl localhost:8080/crumbIssuer/api/json -u devops:4linux | grep -Eo '\w{64}')
 
-BODY='rootUrl=http://172.27.11.10:8080/core:apply=&Submit=Save'
+BODY='rootUrl=http://192.168.1.10:8080/core:apply=&Submit=Save'
 _curl localhost:8080/setupWizard/configureInstance -H "Jenkins-Crumb: $CRUMB" -d "$BODY" > /dev/null

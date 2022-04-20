@@ -17,11 +17,11 @@ apt-get install -y jenkins rundeck rundeck-cli
 
 # Rundeck
 sed -i s/admin:admin/devops:4linux/g /etc/rundeck/realm.properties
-sed -i s/localhost/172.27.11.10/g /etc/rundeck/framework.properties
-sed -i s/localhost/172.27.11.10/g /etc/rundeck/rundeck-config.properties
+sed -i s/localhost/192.168.1.30/g /etc/rundeck/framework.properties
+sed -i s/localhost/192.168.1.30/g /etc/rundeck/rundeck-config.properties
 
 systemctl enable jenkins rundeckd
 systemctl restart jenkins rundeckd
 
-bash /vagrant/provision/gitea.sh &
-bash /vagrant/provision/jenkins.sh &
+bash /root/provision/gitea.sh &
+bash /root/provision/jenkins.sh &

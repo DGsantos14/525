@@ -1,4 +1,4 @@
-#!/bin/bash
+!/bin/bash
 
 if [ -f /usr/local/bin/gitea ]; then
 	exit
@@ -14,13 +14,13 @@ chmod -R 750 /var/lib/gitea/
 mkdir /etc/gitea
 chown root:git /etc/gitea
 chmod 770 /etc/gitea
-cp /vagrant/files/app.ini /etc/gitea/
+cp /root/files/app.ini /etc/gitea/
 chown git: /etc/gitea/app.ini
 
-sqlite3 /var/lib/gitea/data/gitea.db < /vagrant/files/gitea.sql
+sqlite3 /var/lib/gitea/data/gitea.db < /root/files/gitea.sql
 chown git: /var/lib/gitea/data/gitea.db
 
-cp /vagrant/files/gitea.service /etc/systemd/system/gitea.service
+cp /root/files/gitea.service /etc/systemd/system/gitea.service
 systemctl daemon-reload
 systemctl start gitea
 systemctl enable gitea
