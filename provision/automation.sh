@@ -23,5 +23,5 @@ sed -i s/localhost/192.168.1.30/g /etc/rundeck/rundeck-config.properties
 systemctl enable jenkins rundeckd
 systemctl restart jenkins rundeckd
 
-bash /root/provision/gitea.sh &
-bash /root/provision/jenkins.sh &
+bash /vagrant/provision/gitea.sh &
+bash /vagrant/provision/jenkins.sh &
